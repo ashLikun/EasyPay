@@ -1,4 +1,4 @@
-支付宝与微信支付
+#支付宝与微信支付
 ##使用方法
 
 build.gradle文件中添加:
@@ -11,7 +11,7 @@ build.gradle文件中添加:
 
 
 ###支付宝
-   [支付宝文档](https://docs.open.alipay.com/204/105296/)
+        [支付宝文档](https://docs.open.alipay.com/204/105296/)
 
 ###微信
         [微信文档](https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_5)
