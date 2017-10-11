@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 25
+        targetSdkVersion 19
         versionCode 1
         versionName "1.0"
 
@@ -19,12 +19,44 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    /**
+     * aar文件的编译
+     */
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+        maven {
+            url "https://jitpack.io"
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    provided fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:25.3.1'
     //Android Studio环境下：已改用gradle形式，发布到jcenter（ http://jcenter.bintray.com/），请开发者使用gradle来编译、更新微信SDK。
-    compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+    provided 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
 }
 apply from: '../maven.gradle'
+task makeJar(type: Jar) {
+    from file('build/intermediates/classes/debug')
+    archiveName = 'easypay.jar'
+    destinationDir = file('build/libs')
+    //过滤不需要的class
+    exclude "**/**/BuildConfig.class"
+    exclude "**/**/BuildConfig\$*.class"
+    exclude "**/R.class"
+    exclude "**/R\$*.class"
+
+    //指定打包的class
+    //include "com/test/**/*.class"
+}
+makeJar.dependsOn(build)
+//在终端执行生成JAR包
+// gradlew makeJar
