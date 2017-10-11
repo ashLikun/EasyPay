@@ -103,8 +103,7 @@ public class UpPayActivity extends AppCompatActivity implements View.OnClickList
                     });
             builder.create().show();
         } else {
-            EasyPay.startPay(this, PayEntity.get(EasyPay.CHANNEL_UPACP).setOrderInfo((String) msg.obj).setUpDebug(false));
-            EasyPay.startPay(this,PayEntity.get(EasyPay.CHANNEL_WECHAT).setAppId("").setPartnerId("").setPrepay_id("").setSign("").setTimeStamp(""));
+            EasyPay.startPay(this, PayEntity.get(EasyPay.CHANNEL_UPACP).setOrderInfo((String) msg.obj).setUpDebug(true));
         }
         return false;
     }
