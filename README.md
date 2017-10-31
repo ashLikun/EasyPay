@@ -55,7 +55,7 @@
 * 开始支付
 
         EasyPay.startPay(this,PayEntity.get(EasyPay.CHANNEL_ALIPAY).setOrderInfo("orderinfo"));
-    
+
 ### 微信
 [微信文档](https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_5)
 * 开始支付
@@ -66,4 +66,27 @@
                     .setPrepay_id("")
                     .setSign("")
                     .setTimeStamp(""));
-        
+
+## 混淆
+        //支付宝
+        -keep class com.alipay.android.app.IAlixPay{*;}
+        -keep class com.alipay.android.app.IAlixPay$Stub{*;}
+        -keep class com.alipay.android.app.IRemoteServiceCallback{*;}
+        -keep class com.alipay.android.app.IRemoteServiceCallback$Stub{*;}
+        -keep class com.alipay.sdk.app.PayTask{ public *;}
+        -keep class com.alipay.sdk.app.AuthTask{ public *;}
+        -keep class com.alipay.sdk.app.H5PayCallback {
+            <fields>;
+            <methods>;
+        }
+        -keep class com.alipay.android.phone.mrpc.core.** { *; }
+        -keep class com.alipay.apmobilesecuritysdk.** { *; }
+        -keep class com.alipay.mobile.framework.service.annotation.** { *; }
+        -keep class com.alipay.mobilesecuritysdk.face.** { *; }
+        -keep class com.alipay.tscenter.biz.rpc.** { *; }
+        -keep class org.json.alipay.** { *; }
+        -keep class com.alipay.tscenter.** { *; }
+        -keep class com.ta.utdid2.** { *;}
+        -keep class com.ut.device.** { *;}
+
+        //微信

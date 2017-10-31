@@ -37,6 +37,7 @@ public class UpPayActivity extends AppCompatActivity implements View.OnClickList
     private ProgressDialog mLoadingDialog = null;
     private Handler mHandler;
 
+    private String ZFB = "app_id=2016090800464161&biz_content=%7B%22out_trade_no%22%3A%22123456%22%2C%22total_amount%22%3A0.01%2C%22product_code%22%3A%22QUICK_MSECURITY_PAY%22%2C%22subject%22%3A1%2C%22body%22%3A%22%5Cu6d4b%5Cu8bd5%22%7D&charset=UTF-8&format=json&method=alipay.trade.app.pay¬ify_url=http%3A%2F%2F121.43.181.169%2Fapp%2Fzhifubao%2Fpage_notify.php&sign_type=RSA×tamp=2017-10-31+17%3A27%3A20&version=1.0&sign=WdG2e6lQP0%2Bo9eSkUp7dJz6P4gLtGpOMChvkwgbF96%2B6llwVKYpG%2BiU%2BYRMpt9ab0nk9cx1yh8AwAi311XY6Rs6S%2B%2BWphmD5l69VniBVYNDa823MCcS8sMOWqlcIbIo3521OeKgRgHE%2BYtO7Ue1fVOMF00jmM5iErLEkh2rhyWE%3D";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +81,7 @@ public class UpPayActivity extends AppCompatActivity implements View.OnClickList
         }
 
         Message msg = mHandler.obtainMessage();
-        msg.obj = tn;
+        msg.obj = ZFB;
         mHandler.sendMessage(msg);
     }
 
@@ -103,7 +104,7 @@ public class UpPayActivity extends AppCompatActivity implements View.OnClickList
                     });
             builder.create().show();
         } else {
-            EasyPay.startPay(this, PayEntity.get(EasyPay.CHANNEL_UPACP).setOrderInfo((String) msg.obj).setUpDebug(true));
+            EasyPay.startPay(this, PayEntity.get(EasyPay.CHANNEL_ALIPAY).setOrderInfo((String) msg.obj).setUpDebug(true));
         }
         return false;
     }
