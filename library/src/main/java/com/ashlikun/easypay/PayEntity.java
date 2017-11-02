@@ -30,12 +30,21 @@ public class PayEntity implements Serializable {
      *****************************************************************/
     public transient String mode = "01";
 
-    private PayEntity(@EasyPay.PayChannel int channel) {
+
+    public PayEntity() {
+    }
+
+    private PayEntity(int channel) {
         this.channel = channel;
     }
 
     public static PayEntity get(@EasyPay.PayChannel int channel) {
         return new PayEntity(channel);
+    }
+
+    public PayEntity setChannel(@EasyPay.PayChannel int channel) {
+        this.channel = channel;
+        return this;
     }
 
     public PayEntity setAppId(String appId) {
