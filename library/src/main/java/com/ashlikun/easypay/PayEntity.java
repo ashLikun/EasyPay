@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class PayEntity implements Serializable {
     //必须参数
     @EasyPay.PayChannel
-    int channel;
+    transient int channel;
     //这下面是微信的参数
     public String appId;
     public String partnerId;//商户id
@@ -28,7 +28,7 @@ public class PayEntity implements Serializable {
     /*****************************************************************
      * mode参数解释： "00" - 启动银联正式环境 "01" - 连接银联测试环境
      *****************************************************************/
-    public String mode = "01";
+    public transient String mode = "01";
 
     private PayEntity(@EasyPay.PayChannel int channel) {
         this.channel = channel;
