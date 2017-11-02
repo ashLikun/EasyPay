@@ -102,7 +102,7 @@ public class EasyPayActivity extends Activity {
             wxpay();
         } else if (payEntity.channel == EasyPay.CHANNEL_UPACP) {
             upPay();
-        }else{
+        } else {
             setUnknownResult("不支持的支付渠道");
         }
     }
@@ -151,7 +151,7 @@ public class EasyPayActivity extends Activity {
             PayReq req = new PayReq();
             req.appId = payEntity.appId;
             req.partnerId = payEntity.partnerId;
-            req.prepayId = payEntity.prepay_id;
+            req.prepayId = payEntity.prepayId;
             req.nonceStr = payEntity.nonceStr;
             req.timeStamp = payEntity.timeStamp;
             req.packageValue = "Sign=WXPay";

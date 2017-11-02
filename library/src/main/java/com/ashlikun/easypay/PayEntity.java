@@ -17,7 +17,7 @@ public class PayEntity implements Serializable {
     //这下面是微信的参数
     public String appId;
     public String partnerId;//商户id
-    public String prepay_id;//预支付id
+    public String prepayId;//预支付id
     public String sign;//签名
     public String nonceStr;//临时数据
     public String timeStamp;//时间戳
@@ -53,8 +53,8 @@ public class PayEntity implements Serializable {
         return this;
     }
 
-    public PayEntity setPrepay_id(String prepay_id) {
-        this.prepay_id = prepay_id;
+    public PayEntity setPrepayId(String prepayId) {
+        this.prepayId = prepayId;
         return this;
     }
 
