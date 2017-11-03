@@ -52,7 +52,7 @@ public class EasyPayActivity extends Activity {
     public void parseIntent(Intent intent) {
         payResult = new PayResult();
         if (intent.hasExtra(INTENT_FLAG)) {//主动吊起的支付
-            payEntity = (PayEntity) intent.getSerializableExtra(INTENT_FLAG);
+            payEntity = intent.getParcelableExtra(INTENT_FLAG);
             start();
         } else {//微信返回的支付结果
             new WXIntentHandler(payEntity.appId, this, intent);

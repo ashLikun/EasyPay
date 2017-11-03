@@ -58,6 +58,20 @@
 
 ### 微信
 [微信文档](https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_5)
+[微信文档](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419319167&token=&lang=zh_CN)
+
+* 官方依赖
+
+        在build.gradle文件中，添加如下依赖即可：
+        dependencies {
+           compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+        }
+        或
+        dependencies {
+           compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+        }
+        （其中，前者包含统计功能）
+
 * 开始支付
 
         EasyPay.startPay(this,PayEntity.get(EasyPay.CHANNEL_WECHAT)
@@ -90,3 +104,12 @@
         -keep class com.ut.device.** { *;}
 
         //微信
+        -keep class com.tencent.mm.opensdk.** {
+           *;
+        }
+        -keep class com.tencent.wxop.** {
+           *;
+        }
+        -keep class com.tencent.mm.sdk.** {
+           *;
+        }

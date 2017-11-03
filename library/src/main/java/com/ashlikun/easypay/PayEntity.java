@@ -1,6 +1,7 @@
 package com.ashlikun.easypay;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * 作者　　: 李坤
@@ -10,7 +11,8 @@ import java.io.Serializable;
  * 功能介绍：支付的数据
  */
 
-public class PayEntity implements Serializable {
+public class PayEntity implements Parcelable {
+
     //必须参数
     @EasyPay.PayChannel
     transient int channel;
@@ -93,4 +95,48 @@ public class PayEntity implements Serializable {
         this.mode = isDebug ? "01" : "00";
         return this;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.channel);
+        dest.writeString(this.appId);
+        dest.writeString(this.partnerId);
+        dest.writeString(this.prepayId);
+        dest.writeString(this.sign);
+        dest.writeString(this.nonceStr);
+        dest.writeString(this.timeStamp);
+        dest.writeString(this.extData);
+        dest.writeString(this.orderInfo);
+        dest.writeString(this.mode);
+    }
+
+    protected PayEntity(Parcel in) {
+        this.channel = in.readInt();
+        this.appId = in.readString();
+        this.partnerId = in.readString();
+        this.prepayId = in.readString();
+        this.sign = in.readString();
+        this.nonceStr = in.readString();
+        this.timeStamp = in.readString();
+        this.extData = in.readString();
+        this.orderInfo = in.readString();
+        this.mode = in.readString();
+    }
+
+    public static final Parcelable.Creator<PayEntity> CREATOR = new Parcelable.Creator<PayEntity>() {
+        @Override
+        public PayEntity createFromParcel(Parcel source) {
+            return new PayEntity(source);
+        }
+
+        @Override
+        public PayEntity[] newArray(int size) {
+            return new PayEntity[size];
+        }
+    };
 }
