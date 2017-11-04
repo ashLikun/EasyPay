@@ -74,7 +74,7 @@ public class EasyPayActivity extends Activity {
 
     //设置返回结果
     private void setResutl() {
-        if (payResult != null) {
+        if (payResult == null) {
             payResult = new PayResult();
         }
         setResult(RESULT_OK, payResult.getResultIntent());
