@@ -1,9 +1,7 @@
 package com.ashlikun.easypay.wxpay;
 
-import android.app.Activity;
 import android.content.Intent;
 
-import com.ashlikun.easypay.EasyPay;
 import com.ashlikun.easypay.EasyPayActivity;
 import com.ashlikun.easypay.PayResult;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
@@ -42,6 +40,7 @@ public class WXIntentHandler implements IWXAPIEventHandler {
      * 邮箱　　：496546144@qq.com
      * 方法功能：baseResp code : 0：支付成功   -1:支付失败    -2：支付取消
      */
+    @Override
     public void onResp(BaseResp baseResp) {
         if (payResult == null) {
             payResult = new PayResult();
