@@ -74,6 +74,11 @@ public class EasyPayActivity extends Activity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
+
     //设置返回结果
     public void setResutl() {
         if (activityIsNes) {
