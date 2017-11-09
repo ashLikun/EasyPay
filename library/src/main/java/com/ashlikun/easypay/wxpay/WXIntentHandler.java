@@ -3,6 +3,8 @@ package com.ashlikun.easypay.wxpay;
 import android.app.Activity;
 import android.content.Intent;
 
+import com.ashlikun.easypay.EasyPay;
+import com.ashlikun.easypay.EasyPayActivity;
 import com.ashlikun.easypay.PayResult;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
@@ -21,9 +23,9 @@ import static com.ashlikun.easypay.EasyPayActivity.payResult;
  */
 
 public class WXIntentHandler implements IWXAPIEventHandler {
-    Activity activity;
+    EasyPayActivity activity;
 
-    public WXIntentHandler(String appId, Activity activity, Intent intent) {
+    public WXIntentHandler(String appId, EasyPayActivity activity, Intent intent) {
         this.activity = activity;
         IWXAPI api = WXAPIFactory.createWXAPI(activity, appId);
         api.handleIntent(intent, this);
@@ -45,6 +47,6 @@ public class WXIntentHandler implements IWXAPIEventHandler {
             payResult = new PayResult();
         }
         payResult.setWxResult(baseResp);
-        activity.finish();
+        activity.setResutl();
     }
 }

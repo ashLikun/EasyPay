@@ -59,21 +59,9 @@ public class EasyPayActivity extends Activity {
         }
     }
 
-    /**
-     * 当获取到焦点的时候，判断是否是微信支付后返回来的
-     */
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (payEntity != null) {
-            if (payEntity.channel == EasyPay.CHANNEL_WECHAT && payResult.resultChannel == EasyPay.CHANNEL_WECHAT) {
-                setResutl();
-            }
-        }
-    }
 
     //设置返回结果
-    private void setResutl() {
+    public void setResutl() {
         if (payResult == null) {
             payResult = new PayResult();
         }

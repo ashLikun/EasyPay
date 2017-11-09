@@ -3,11 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EasyPay.iml" filepath="$PROJECT_DIR$/EasyPay.iml" />
-      <module fileurl="file://E:\studio_code\ashLikun\EasyPay\EasyPay.iml" filepath="E:\studio_code\ashLikun\EasyPay\EasyPay.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://E:\studio_code\ashLikun\EasyPay\app\app.iml" filepath="E:\studio_code\ashLikun\EasyPay\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
-      <module fileurl="file://E:\studio_code\ashLikun\EasyPay\library\library.iml" filepath="E:\studio_code\ashLikun\EasyPay\library\library.iml" />
     </modules>
   </component>
 </project>
