@@ -24,6 +24,7 @@ public class PayEntity implements Parcelable {
     public String nonceStr;//临时数据
     public String timeStamp;//时间戳
     public String extData;//扩展数据
+    public String packageValue;//Sign=WXPay
 
     //支付宝与银联的
     public String orderInfo;//订单信息，银联的TN号
@@ -111,6 +112,7 @@ public class PayEntity implements Parcelable {
         dest.writeString(this.nonceStr);
         dest.writeString(this.timeStamp);
         dest.writeString(this.extData);
+        dest.writeString(this.packageValue);
         dest.writeString(this.orderInfo);
         dest.writeString(this.mode);
     }
@@ -124,6 +126,7 @@ public class PayEntity implements Parcelable {
         this.nonceStr = in.readString();
         this.timeStamp = in.readString();
         this.extData = in.readString();
+        this.packageValue = in.readString();
         this.orderInfo = in.readString();
         this.mode = in.readString();
     }

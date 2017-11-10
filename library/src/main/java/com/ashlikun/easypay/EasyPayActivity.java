@@ -173,7 +173,7 @@ public class EasyPayActivity extends Activity {
             req.prepayId = payEntity.prepayId;
             req.nonceStr = payEntity.nonceStr;
             req.timeStamp = payEntity.timeStamp;
-            req.packageValue = "Sign=WXPay";
+            req.packageValue = payEntity.packageValue != null ? payEntity.packageValue : "Sign=WXPay";
             req.sign = payEntity.sign;
             req.extData = payEntity.extData;
             if (!req.checkArgs() || !msgApi.sendReq(req)) {
