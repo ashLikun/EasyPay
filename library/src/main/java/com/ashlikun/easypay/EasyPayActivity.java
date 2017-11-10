@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.ashlikun.easypay.wxpay.WXIntentHandler;
@@ -70,7 +69,6 @@ public class EasyPayActivity extends Activity {
         super.onResume();
         if (payEntity != null) {
             if (payEntity.channel == EasyPay.CHANNEL_WECHAT && payResult.resultChannel == EasyPay.CHANNEL_WECHAT) {
-                Toast.makeText(this, "55555555555555", Toast.LENGTH_SHORT).show();
                 setResutl();
             }
         }
@@ -91,9 +89,7 @@ public class EasyPayActivity extends Activity {
             finish();
             payResult = null;
             payEntity = null;
-            Toast.makeText(this, "1111111111111", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "2222222222222", Toast.LENGTH_SHORT).show();
             //微信的
             finish();
         }
@@ -112,11 +108,9 @@ public class EasyPayActivity extends Activity {
             finish();
             payResult = null;
             payEntity = null;
-            Toast.makeText(this,"333333333333333",Toast.LENGTH_SHORT).show();
         } else {
             //微信的
             finish();
-            Toast.makeText(this,"44444444444444444",Toast.LENGTH_SHORT).show();
         }
     }
 
