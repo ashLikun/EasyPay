@@ -163,7 +163,6 @@ public class EasyPayActivity extends Activity {
     }
 
     //微信支付
-
     public void wxpay() {
         try {
             IWXAPI msgApi = WXAPIFactory.createWXAPI(this, null);
