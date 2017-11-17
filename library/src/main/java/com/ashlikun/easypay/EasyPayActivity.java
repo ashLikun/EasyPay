@@ -96,7 +96,7 @@ public class EasyPayActivity extends Activity {
     }
 
     //设置未定义错误
-    private void setUnknownResult(String msg) {
+    public void setUnknownResult(String msg) {
         if (activityIsNes) {
             android.util.Log.e(EasyPayActivity.class.getName(), msg);
             if (payResult != null) {
@@ -184,6 +184,7 @@ public class EasyPayActivity extends Activity {
         } catch (NoClassDefFoundError e) {
             e.printStackTrace();
             setUnknownResult(payEntity.channel + "不支持该渠道: 。缺少微信的 SDK。");
+
         }
     }
 

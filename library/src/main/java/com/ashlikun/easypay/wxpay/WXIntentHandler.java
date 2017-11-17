@@ -1,9 +1,11 @@
 package com.ashlikun.easypay.wxpay;
 
 import android.content.Intent;
+import android.util.Log;
 
 import com.ashlikun.easypay.EasyPayActivity;
 import com.ashlikun.easypay.PayResult;
+import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -26,7 +28,10 @@ public class WXIntentHandler implements IWXAPIEventHandler {
     public WXIntentHandler(String appId, EasyPayActivity activity, Intent intent) {
         this.activity = activity;
         IWXAPI api = WXAPIFactory.createWXAPI(activity, appId);
-        api.handleIntent(intent, this);
+        boolean result = api.handleIntent(intent, this);
+        if (!result) {
+            activity.setUnknownResult("微信返回失败");
+        }
     }
 
     @Override
@@ -42,10 +47,13 @@ public class WXIntentHandler implements IWXAPIEventHandler {
      */
     @Override
     public void onResp(BaseResp baseResp) {
-        if (payResult == null) {
-            payResult = new PayResult();
+        Log.e("WXIntentHandler", baseResp.getType() + "  " + baseResp.errCode);
+        if (baseResp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
+            if (payResult == null) {
+                payResult = new PayResult();
+            }
+            payResult.setWxResult(baseResp);
+            activity.setResutl();
         }
-        payResult.setWxResult(baseResp);
-        activity.setResutl();
     }
 }
