@@ -57,10 +57,10 @@ public class EasyPayActivity extends Activity {
             activityIsNes = true;
             payEntity = intent.getParcelableExtra(INTENT_FLAG);
             start();
-            Log.e("EasyPayActivity", "start");
+            Log.e("EasyPayActivity", "111111111111111111");
         } else {//微信返回的支付结果
             new WXIntentHandler(payEntity.appId, this, intent);
-            Log.e("EasyPayActivity", "微信返回的支付结果");
+            Log.e("EasyPayActivity", "22222222222222222" + activityIsNes);
         }
     }
 
@@ -72,7 +72,7 @@ public class EasyPayActivity extends Activity {
         super.onResume();
         if (payEntity != null) {
             if (payEntity.channel == EasyPay.CHANNEL_WECHAT && payResult.resultChannel == EasyPay.CHANNEL_WECHAT) {
-                Log.e("EasyPayActivity", "微信返回的支付结果2");
+                Log.e("EasyPayActivity", "333333333333333333");
                 setResutl();
             }
         }
@@ -85,6 +85,7 @@ public class EasyPayActivity extends Activity {
 
     //设置返回结果
     public void setResutl() {
+        Log.e("EasyPayActivity", "fffffffffffffffff" + activityIsNes);
         if (activityIsNes) {
             if (payResult == null) {
                 payResult = new PayResult();
@@ -101,6 +102,7 @@ public class EasyPayActivity extends Activity {
 
     //设置未定义错误
     public void setUnknownResult(String msg) {
+        Log.e("EasyPayActivity", "uuuuuuuuuuuuuuu" + activityIsNes);
         if (activityIsNes) {
             android.util.Log.e(EasyPayActivity.class.getName(), msg);
             if (payResult != null) {
