@@ -47,7 +47,6 @@ public class WXIntentHandler implements IWXAPIEventHandler {
      */
     @Override
     public void onResp(BaseResp baseResp) {
-        Log.e("WXIntentHandler", baseResp.getType() + "  " + baseResp.errCode);
         if (baseResp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
             if (payResult == null) {
                 payResult = new PayResult();

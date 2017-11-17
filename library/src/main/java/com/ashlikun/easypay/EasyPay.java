@@ -57,6 +57,8 @@ public class EasyPay {
     }
 
     public static PayResult getResult(Intent intent) {
+        EasyPayActivity.payResult = null;
+        EasyPayActivity.payEntity = null;
         if (intent == null || intent.getExtras() == null) {
             return null;
         }
