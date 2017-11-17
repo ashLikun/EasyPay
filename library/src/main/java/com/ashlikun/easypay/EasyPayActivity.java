@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import com.alipay.sdk.app.PayTask;
 import com.ashlikun.easypay.wxpay.WXIntentHandler;
@@ -56,8 +57,10 @@ public class EasyPayActivity extends Activity {
             activityIsNes = true;
             payEntity = intent.getParcelableExtra(INTENT_FLAG);
             start();
+            Log.e("EasyPayActivity", "start");
         } else {//微信返回的支付结果
             new WXIntentHandler(payEntity.appId, this, intent);
+            Log.e("EasyPayActivity", "微信返回的支付结果");
         }
     }
 
@@ -69,6 +72,7 @@ public class EasyPayActivity extends Activity {
         super.onResume();
         if (payEntity != null) {
             if (payEntity.channel == EasyPay.CHANNEL_WECHAT && payResult.resultChannel == EasyPay.CHANNEL_WECHAT) {
+                Log.e("EasyPayActivity", "微信返回的支付结果2");
                 setResutl();
             }
         }

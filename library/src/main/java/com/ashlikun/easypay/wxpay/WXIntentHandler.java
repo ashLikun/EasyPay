@@ -32,6 +32,7 @@ public class WXIntentHandler implements IWXAPIEventHandler {
         if (!result) {
             activity.setUnknownResult("微信返回失败");
         }
+        Log.e("WXIntentHandler", "result" + result);
     }
 
     @Override
