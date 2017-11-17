@@ -35,7 +35,7 @@ public class EasyPayActivity extends Activity {
     private static final int SDK_PAY_FLAG = 2;
     public static PayEntity payEntity = null;//支付的实体
     public static PayResult payResult = null;//支付结果
-
+    public boolean activityIsNes = false;//一个标记当前activity和微信支付是否是同一个，还是2个存在
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,10 +53,10 @@ public class EasyPayActivity extends Activity {
         payResult = new PayResult();
         if (intent.hasExtra(INTENT_FLAG)) {//主动吊起的支付
             payEntity = intent.getParcelableExtra(INTENT_FLAG);
+            activityIsNes = true;
             start();
         } else {//微信返回的支付结果
             new WXIntentHandler(payEntity.appId, this, intent);
-
         }
     }
 
@@ -80,22 +80,36 @@ public class EasyPayActivity extends Activity {
 
     //设置返回结果
     public void setResutl() {
-        if (payResult == null) {
-            payResult = new PayResult();
+        if (activityIsNes) {
+            if (payResult == null) {
+                payResult = new PayResult();
+            }
+            setResult(RESULT_OK, payResult.getResultIntent());
+            finish();
+            payResult = null;
+            payEntity = null;
+        } else {
+            //微信的
+            finish();
         }
-        setResult(RESULT_OK, payResult.getResultIntent());
-        finish();
     }
 
     //设置未定义错误
     public void setUnknownResult(String msg) {
-        if (payResult != null) {
-            payResult = new PayResult();
+        if (activityIsNes) {
+            if (payResult != null) {
+                payResult = new PayResult();
+            }
+            payResult.result = PayResult.RESULT_UNKNOWN;
+            payResult.errorMsg = msg;
+            setResult(RESULT_OK, payResult.getResultIntent());
+            finish();
+            payResult = null;
+            payEntity = null;
+        } else {
+            //微信的
+            finish();
         }
-        payResult.result = PayResult.RESULT_UNKNOWN;
-        payResult.errorMsg = msg;
-        setResult(RESULT_OK, payResult.getResultIntent());
-        finish();
     }
 
     //开始发起支付
@@ -114,13 +128,11 @@ public class EasyPayActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        payEntity = null;
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        payEntity = null;
     }
 
     @Override
