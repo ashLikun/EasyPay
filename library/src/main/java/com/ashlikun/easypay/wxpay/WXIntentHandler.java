@@ -1,7 +1,6 @@
 package com.ashlikun.easypay.wxpay;
 
 import android.content.Intent;
-import android.util.Log;
 
 import com.ashlikun.easypay.EasyPayActivity;
 import com.ashlikun.easypay.PayResult;
