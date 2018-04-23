@@ -1,17 +1,14 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 19
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
     }
     buildTypes {
         release {
@@ -19,9 +16,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    /**
-     * aar文件的编译
-     */
+/**
+ * aar文件的编译
+ */
     repositories {
         flatDir {
             dirs 'libs'
@@ -30,33 +27,14 @@ android {
             url "https://jitpack.io"
         }
     }
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['libs']
-        }
-    }
 }
 
 dependencies {
     provided fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:25.3.1'
+    compileOnly 'com.android.support:appcompat-v7:25.3.1'
     //Android Studio环境下：已改用gradle形式，发布到jcenter（ http://jcenter.bintray.com/），请开发者使用gradle来编译、更新微信SDK。
-    provided 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+    compileOnly 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
 }
 apply from: '../maven.gradle'
-task makeJar(type: Jar) {
-    from file('build/intermediates/classes/debug')
-    archiveName = 'easypay.jar'
-    destinationDir = file('build/libs')
-    //过滤不需要的class
-    exclude "**/**/BuildConfig.class"
-    exclude "**/**/BuildConfig\$*.class"
-    exclude "**/R.class"
-    exclude "**/R\$*.class"
 
-    //指定打包的class
-    //include "com/test/**/*.class"
-}
-makeJar.dependsOn(build)
-//在终端执行生成JAR包
-// gradlew makeJar
+

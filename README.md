@@ -1,12 +1,25 @@
+[![Release](https://jitpack.io/v/ashLikun/EasyPay.svg)](https://jitpack.io/#ashLikun/EasyPay)
+
+# **XRecycleView**
 # 支付宝与微信支付,银联支付
 ## 使用方法
 
-    build.gradle文件中添加:
-    compile 'com.github.ashLikun:EasyPay:1.0.1'
-    //注意各个sdk的添加，和混淆
+build.gradle文件中添加:
+```gradle
+allprojects {
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
+}
+```
+并且:
+
+```gradle
+dependencies {
+    implementation 'com.github.ashLikun:EasyPay:{latest version}'//EasyPay
+}
 
 ## 详细介绍
-   
 * 注册 activity  
     
         <!-- 微信支付 -->
