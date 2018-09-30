@@ -26,7 +26,7 @@ dependencies {
         <!-- 1.需要将以下"替换成自己 APK 的包名"换成在微信平台上注册填写的包名 -->
         <!-- 2.WxPayEntryActivity 这个类在 SDK 内部实现，开发者不需要额外实现该类 -->
         <activity-alias
-            android:name="替换成自己APK的包名.wxapi.WXPayEntryActivity"
+            android:name="(${applicationId})替换成自己APK的包名.wxapi.WXPayEntryActivity"
             android:exported="true"
             android:targetActivity="com.ashlikun.easypay.EasyPayActivity" />
        
