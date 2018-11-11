@@ -67,6 +67,7 @@ public class EasyPayActivity extends Activity {
             activityIsNes = true;
             start();
         } else {
+            activityIsNes = false;
             //微信返回的支付结果
             new WXIntentHandler(payEntity.appId, this, intent);
         }
@@ -185,7 +186,7 @@ public class EasyPayActivity extends Activity {
      */
     public void wxpay() {
         try {
-            IWXAPI msgApi = WXAPIFactory.createWXAPI(getApplication(), null);
+            IWXAPI msgApi = WXAPIFactory.createWXAPI(getApplication(), payEntity.appId);
             msgApi.registerApp(payEntity.appId);
             PayReq req = new PayReq();
             req.appId = payEntity.appId;
@@ -204,7 +205,6 @@ public class EasyPayActivity extends Activity {
         } catch (NoClassDefFoundError e) {
             e.printStackTrace();
             setUnknownResult(payEntity.channel + "不支持该渠道: 。缺少微信的 SDK。");
-
         }
     }
 

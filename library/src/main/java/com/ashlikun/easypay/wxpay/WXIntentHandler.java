@@ -26,7 +26,8 @@ public class WXIntentHandler implements IWXAPIEventHandler {
 
     public WXIntentHandler(String appId, EasyPayActivity activity, Intent intent) {
         this.activity = activity;
-        IWXAPI api = WXAPIFactory.createWXAPI(activity, appId);
+        IWXAPI api = WXAPIFactory.createWXAPI(activity.getApplication(), appId);
+        api.registerApp(appId);
         boolean result = api.handleIntent(intent, this);
         if (!result) {
             activity.setUnknownResult("微信返回失败");
