@@ -1,6 +1,5 @@
 package com.ashlikun.easypay;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,9 +32,19 @@ import static com.ashlikun.easypay.EasyPay.INTENT_FLAG;
 
 public class EasyPayActivity extends Activity {
     private static final int SDK_PAY_FLAG = 2;
-    public static PayEntity payEntity = null;//支付的实体
-    public static PayResult payResult = null;//支付结果
-    public boolean activityIsNes = false;//一个标记当前activity和微信支付是否是同一个，还是2个存在
+    /**
+     * 支付的实体
+     */
+    public static PayEntity payEntity = null;
+    /**
+     * 支付结果
+     */
+    public static PayResult payResult = null;
+    /**
+     * 一个标记当前activity和微信支付是否是同一个，还是2个存在
+     */
+    public boolean activityIsNes = false;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,11 +60,13 @@ public class EasyPayActivity extends Activity {
 
     public void parseIntent(Intent intent) {
         payResult = new PayResult();
-        if (intent.hasExtra(INTENT_FLAG)) {//主动吊起的支付
+        if (intent.hasExtra(INTENT_FLAG)) {
+            //主动吊起的支付
             payEntity = intent.getParcelableExtra(INTENT_FLAG);
             activityIsNes = true;
             start();
-        } else {//微信返回的支付结果
+        } else {
+            //微信返回的支付结果
             new WXIntentHandler(payEntity.appId, this, intent);
         }
     }
@@ -78,7 +89,9 @@ public class EasyPayActivity extends Activity {
 
     }
 
-    //设置返回结果
+    /**
+     * 设置返回结果
+     */
     public void setResutl() {
         if (activityIsNes) {
             if (payResult == null) {
@@ -94,7 +107,11 @@ public class EasyPayActivity extends Activity {
         }
     }
 
-    //设置未定义错误
+    /**
+     * 设置未定义错误
+     *
+     * @param msg
+     */
     public void setUnknownResult(String msg) {
         if (activityIsNes) {
             if (payResult != null) {
@@ -112,7 +129,9 @@ public class EasyPayActivity extends Activity {
         }
     }
 
-    //开始发起支付
+    /**
+     * 开始发起支付
+     */
     private void start() {
         if (payEntity.channel == EasyPay.CHANNEL_ALIPAY) {
             alipay();
@@ -148,7 +167,9 @@ public class EasyPayActivity extends Activity {
         setResutl();
     }
 
-    //银联支付
+    /**
+     * 银联支付
+     */
     public void upPay() {
         try {
             UPPayAssistEx.startPay(this, null, null, payEntity.orderInfo, payEntity.mode);
@@ -158,7 +179,9 @@ public class EasyPayActivity extends Activity {
         }
     }
 
-    //微信支付
+    /**
+     * 微信支付
+     */
     public void wxpay() {
         try {
             IWXAPI msgApi = WXAPIFactory.createWXAPI(this, null);
@@ -184,7 +207,9 @@ public class EasyPayActivity extends Activity {
         }
     }
 
-    //支付宝支付
+    /**
+     * 支付宝支付
+     */
     private void alipay() {
         Runnable payRunnable = new Runnable() {
             @Override
@@ -209,9 +234,8 @@ public class EasyPayActivity extends Activity {
         payThread.start();
     }
 
-    @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
-        @SuppressWarnings("unused")
+        @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 //支付宝

@@ -18,7 +18,7 @@ allprojects {
 dependencies {
     implementation 'com.github.ashLikun:EasyPay:{latest version}'//EasyPay
 }
-
+```
 ## 详细介绍
 * 注册 activity  
     

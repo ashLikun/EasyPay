@@ -17,11 +17,17 @@ import java.lang.annotation.RetentionPolicy;
  */
 
 public class EasyPay {
-    //请求code
+    /**
+     * 请求code
+     */
     public static final int REQUEST_CODE_PAYMENT = 1010;
-    //请求的数据intent  flag
+    /**
+     * 请求的数据intent  flag
+     */
     public static final String INTENT_FLAG = "PAYDATA";
-    //返回给调用者的数据
+    /**
+     * 返回给调用者的数据
+     */
     public static final String PAY_RESULT = "PAY_RESULT";
 
     /**
