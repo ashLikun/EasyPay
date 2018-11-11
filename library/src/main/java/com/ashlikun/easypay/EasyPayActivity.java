@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 
 import com.alipay.sdk.app.PayTask;
 import com.ashlikun.easypay.wxpay.WXIntentHandler;
@@ -192,7 +193,7 @@ public class EasyPayActivity extends Activity {
             req.prepayId = payEntity.prepayId;
             req.nonceStr = payEntity.nonceStr;
             req.timeStamp = payEntity.timeStamp;
-            req.packageValue = payEntity.packageValue != null ? payEntity.packageValue : "Sign=WXPay";
+            req.packageValue = TextUtils.isEmpty(payEntity.packageValue) ? "Sign=WXPay" : payEntity.packageValue;
             req.sign = payEntity.sign;
             req.extData = payEntity.extData;
             if (!req.checkArgs() || !msgApi.sendReq(req)) {

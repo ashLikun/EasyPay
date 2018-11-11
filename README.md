@@ -71,7 +71,8 @@ dependencies {
 
 ### 微信
 [微信文档](https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_5)
-[微信文档](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419319167&token=&lang=zh_CN)
+
+[微信开发工具包](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419319167&token=&lang=zh_CN)
 
 * 官方依赖
 
@@ -87,12 +88,14 @@ dependencies {
 
 * 开始支付
 
-        EasyPay.startPay(this,PayEntity.get(EasyPay.CHANNEL_WECHAT)
-                    .setAppId("")
-                    .setPartnerId("")
-                    .setPrepay_id("")
-                    .setSign("")
-                    .setTimeStamp(""));
+        EasyPay.startPay(activity, PayEntity.get(EasyPay.CHANNEL_WECHAT)
+               .setAppId(appId)
+               .setPartnerId(partnerId)
+               .setPrepayId(prepayId)
+               .setSign(sign)
+               .setNonceStr(nonceStr)
+               .setTimeStamp(timeStamp)
+               .setPackageValue(packageValue));
 
 ## 混淆
         //支付宝

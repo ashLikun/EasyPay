@@ -85,6 +85,11 @@ public class PayEntity implements Parcelable {
         return this;
     }
 
+    public PayEntity setPackageValue(String packageValue) {
+        this.packageValue = packageValue;
+        return this;
+    }
+
     //支付宝与银联的
     public PayEntity setOrderInfo(String orderInfo) {
         this.orderInfo = orderInfo;
