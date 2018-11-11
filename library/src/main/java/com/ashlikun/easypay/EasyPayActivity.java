@@ -185,7 +185,7 @@ public class EasyPayActivity extends Activity {
      */
     public void wxpay() {
         try {
-            IWXAPI msgApi = WXAPIFactory.createWXAPI(this, null);
+            IWXAPI msgApi = WXAPIFactory.createWXAPI(getApplication(), null);
             msgApi.registerApp(payEntity.appId);
             PayReq req = new PayReq();
             req.appId = payEntity.appId;
