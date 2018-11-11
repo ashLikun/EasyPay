@@ -41,10 +41,6 @@ public class EasyPayActivity extends Activity {
      * 支付结果
      */
     public static PayResult payResult = null;
-    /**
-     * 一个标记当前activity和微信支付是否是同一个，还是2个存在
-     */
-    public boolean activityIsNes = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,10 +60,8 @@ public class EasyPayActivity extends Activity {
         if (intent.hasExtra(INTENT_FLAG)) {
             //主动吊起的支付
             payEntity = intent.getParcelableExtra(INTENT_FLAG);
-            activityIsNes = true;
             start();
         } else {
-            activityIsNes = false;
             //微信返回的支付结果
             new WXIntentHandler(payEntity.appId, this, intent);
         }
@@ -95,18 +89,13 @@ public class EasyPayActivity extends Activity {
      * 设置返回结果
      */
     public void setResutl() {
-        if (activityIsNes) {
-            if (payResult == null) {
-                payResult = new PayResult();
-            }
-            setResult(RESULT_OK, payResult.getResultIntent());
-            finish();
-            payResult = null;
-            payEntity = null;
-        } else {
-            //微信的
-            finish();
+        if (payResult == null) {
+            payResult = new PayResult();
         }
+        setResult(RESULT_OK, payResult.getResultIntent());
+        finish();
+        payResult = null;
+        payEntity = null;
     }
 
     /**
@@ -115,20 +104,15 @@ public class EasyPayActivity extends Activity {
      * @param msg
      */
     public void setUnknownResult(String msg) {
-        if (activityIsNes) {
-            if (payResult != null) {
-                payResult = new PayResult();
-            }
-            payResult.result = PayResult.RESULT_UNKNOWN;
-            payResult.errorMsg = msg;
-            setResult(RESULT_OK, payResult.getResultIntent());
-            finish();
-            payResult = null;
-            payEntity = null;
-        } else {
-            //微信的
-            finish();
+        if (payResult != null) {
+            payResult = new PayResult();
         }
+        payResult.result = PayResult.RESULT_UNKNOWN;
+        payResult.errorMsg = msg;
+        setResult(RESULT_OK, payResult.getResultIntent());
+        finish();
+        payResult = null;
+        payEntity = null;
     }
 
     /**

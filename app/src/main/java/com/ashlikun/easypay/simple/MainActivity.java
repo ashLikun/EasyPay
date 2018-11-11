@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         PayEntity payEntity = PayEntity.get(EasyPay.CHANNEL_WECHAT);
         EasyPay.startPay(this, payEntity);
+        EasyPay.startPay(this, payEntity);
     }
 
     @Override

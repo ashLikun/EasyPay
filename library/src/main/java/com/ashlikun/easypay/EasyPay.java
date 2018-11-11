@@ -18,6 +18,11 @@ import java.lang.annotation.RetentionPolicy;
 
 public class EasyPay {
     /**
+     * 每次start不能重复请求，间隔默认1秒，可以更改
+     */
+    public static int DELAY_START = 1000;
+    public static long CURRENT_TIME = 0;
+    /**
      * 请求code
      */
     public static final int REQUEST_CODE_PAYMENT = 1010;
@@ -51,15 +56,21 @@ public class EasyPay {
 
 
     public static void startPay(Activity activity, PayEntity payEntity) {
-        Intent intent = new Intent(activity, EasyPayActivity.class);
-        intent.putExtra(INTENT_FLAG, payEntity);
-        activity.startActivityForResult(intent, REQUEST_CODE_PAYMENT);
+        if ((System.currentTimeMillis() - CURRENT_TIME) > DELAY_START) {
+            Intent intent = new Intent(activity, EasyPayActivity.class);
+            intent.putExtra(INTENT_FLAG, payEntity);
+            activity.startActivityForResult(intent, REQUEST_CODE_PAYMENT);
+        }
+        CURRENT_TIME = System.currentTimeMillis();
     }
 
     public static void startPay(Fragment fragment, PayEntity payEntity) {
-        Intent intent = new Intent(fragment.getActivity(), EasyPayActivity.class);
-        intent.putExtra(INTENT_FLAG, payEntity);
-        fragment.startActivityForResult(intent, REQUEST_CODE_PAYMENT);
+        if ((System.currentTimeMillis() - CURRENT_TIME) > DELAY_START) {
+            Intent intent = new Intent(fragment.getActivity(), EasyPayActivity.class);
+            intent.putExtra(INTENT_FLAG, payEntity);
+            fragment.startActivityForResult(intent, REQUEST_CODE_PAYMENT);
+        }
+        CURRENT_TIME = System.currentTimeMillis();
     }
 
     public static PayResult getResult(Intent intent) {
