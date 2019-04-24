@@ -2,11 +2,12 @@ package com.ashlikun.easypay;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.annotation.IntDef;
-import android.support.v4.app.Fragment;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IntDef;
+import androidx.fragment.app.Fragment;
 
 /**
  * 作者　　: 李坤
