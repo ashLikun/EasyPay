@@ -95,7 +95,9 @@ dependencies {
                .setSign(sign)
                .setNonceStr(nonceStr)
                .setTimeStamp(timeStamp)
-               .setPackageValue(packageValue));
+               .setPackageValue(packageValue),callback);
+               
+        //如果是银联支付，请在onActivityResult里面调用  EasyPay#onUpActivityResult
 
 ## 混淆
         //支付宝

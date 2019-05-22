@@ -1,17 +1,14 @@
-package com.ashlikun.easypay.wxpay;
+package com.ashlikun.easypay;
 
+import android.app.Activity;
 import android.content.Intent;
 
-import com.ashlikun.easypay.EasyPayActivity;
-import com.ashlikun.easypay.PayResult;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-
-import static com.ashlikun.easypay.EasyPayActivity.payResult;
 
 /**
  * 作者　　: 李坤
@@ -22,15 +19,15 @@ import static com.ashlikun.easypay.EasyPayActivity.payResult;
  */
 
 public class WXIntentHandler implements IWXAPIEventHandler {
-    EasyPayActivity activity;
+    EasyPay pay;
 
-    public WXIntentHandler(String appId, EasyPayActivity activity, Intent intent) {
-        this.activity = activity;
-        IWXAPI api = WXAPIFactory.createWXAPI(activity.getApplication(), appId);
-        api.registerApp(appId);
+    public WXIntentHandler(Activity activity, EasyPay pay, Intent intent) {
+        this.pay = pay;
+        IWXAPI api = WXAPIFactory.createWXAPI(activity.getApplicationContext(), pay.payEntity.appId);
+        api.registerApp(pay.payEntity.appId);
         boolean result = api.handleIntent(intent, this);
         if (!result) {
-            activity.setUnknownResult("微信返回失败");
+            pay.setUnknownResult("微信返回失败");
         }
     }
 
@@ -48,11 +45,11 @@ public class WXIntentHandler implements IWXAPIEventHandler {
     @Override
     public void onResp(BaseResp baseResp) {
         if (baseResp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
-            if (payResult == null) {
-                payResult = new PayResult();
+            if (pay.payResult == null) {
+                pay.payResult = new PayResult();
             }
-            payResult.setWxResult(baseResp);
-            activity.setResutl();
+            pay.payResult.setWxResult(baseResp);
+            pay.setResutl();
         }
     }
 }
