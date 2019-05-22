@@ -125,16 +125,15 @@ public class EasyPay implements LifecycleObserver {
      * 清空数据
      */
     public void clean() {
+        EasyPayActivity.easyPay = null;
         payResult = null;
         payEntity = null;
         callback = null;
         activity = null;
     }
-
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void onDestroy() {
         clean();
-        EasyPayActivity.easyPay = null;
     }
 
     /**
