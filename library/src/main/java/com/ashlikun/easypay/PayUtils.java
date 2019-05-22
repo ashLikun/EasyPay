@@ -1,6 +1,7 @@
 package com.ashlikun.easypay;
 
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.text.TextUtils;
 
@@ -95,6 +96,7 @@ public class PayUtils {
         EasyPay easyPay;
 
         public MyHandler(EasyPay easyPay) {
+            super(Looper.getMainLooper());
             this.easyPay = easyPay;
         }
 
