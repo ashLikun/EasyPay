@@ -134,6 +134,7 @@ public class EasyPay implements LifecycleObserver {
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void onDestroy() {
         clean();
+        EasyPayActivity.easyPay = null;
     }
 
     /**
