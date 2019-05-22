@@ -1,13 +1,11 @@
 package com.ashlikun.easypay.simple;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.View;
-import android.widget.Toast;
 
 import com.ashlikun.easypay.EasyPay;
 import com.ashlikun.easypay.OnPayCallback;
