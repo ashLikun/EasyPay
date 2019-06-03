@@ -98,10 +98,20 @@ public class EasyPay implements LifecycleObserver {
         if (payResult == null) {
             payResult = new PayResult();
         }
-        if (callback != null) {
-            callback.onPayResult(payResult);
-        }
+        toCallback();
+    }
+
+    /**
+     * 回调结果
+     */
+    public void toCallback() {
+        //在回调前保存信息，防止内存泄漏
+        PayResult savePayResult = payResult;
+        OnPayCallback saveCallback = callback;
         clean();
+        if (saveCallback != null) {
+            saveCallback.onPayResult(savePayResult);
+        }
     }
 
     /**
@@ -115,10 +125,7 @@ public class EasyPay implements LifecycleObserver {
         }
         payResult.result = PayResult.RESULT_UNKNOWN;
         payResult.errorMsg = msg;
-        if (callback != null) {
-            callback.onPayResult(payResult);
-        }
-        clean();
+        toCallback();
     }
 
     /**
@@ -131,6 +138,7 @@ public class EasyPay implements LifecycleObserver {
         callback = null;
         activity = null;
     }
+
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void onDestroy() {
         clean();
